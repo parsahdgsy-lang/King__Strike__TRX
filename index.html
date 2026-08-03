@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
+<button id="modeBtn" onclick="toggleDarkMode()">🌙 ☀️</button>
+
 </section>
 
 <head>
@@ -55,6 +57,12 @@ clearInterval(timer);
 
 </script>
 
+<script>
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}
+</script>
+
 <body>
 
   <div id="loading">
@@ -89,8 +97,6 @@ clearInterval(timer);
 
 <a href="#vote">نظرسنجی</a>
 
-<a href="#season">شمارش معکوس</a>
-
 <a href="#about">درباره کانال</a>
 
 </nav>
@@ -109,7 +115,7 @@ clearInterval(timer);
 
 <h2>آخرین ویدئوها</h2>
 
-<div class="video-card">
+<div class="video-card reveal">
 
 <a href="https://youtu.be/4LCC3o8ZeOw?si=ceHKNna9OKuF64c4" target="_blank">
 
@@ -127,9 +133,9 @@ clearInterval(timer);
 
 <h2>📰 اخبار کالاف</h2>
 
-<div class="news-container">
+<div class="news-container reveal">
 
-<div class="news-card">
+<div class="news-card reveal">
 
 <img src="images/news1.jpg" alt="خبر">
 
@@ -145,7 +151,7 @@ clearInterval(timer);
 
 </div>
 
-<div class="news-card">
+<div class="news-card reveal">
 
 <img src="images/news2.jpg" alt="خبر دوم">
 
@@ -173,7 +179,7 @@ clearInterval(timer);
     <button>ادامه مطلب</button>
 </a>
 
-<div class="news-card">
+<div class="news-card reveal">
 
 <img src="images/news3.jpg" alt="خبر سوم">
 
@@ -207,7 +213,7 @@ clearInterval(timer);
     <button>ادامه مطلب</button>
 </a>
 
-<div class="news-card"
+<div class="news-card reveal"
  style="direction: rtl;"></div>
 
 <img src="images/news4.jpg" alt="خبر چهارم">
@@ -290,7 +296,7 @@ Points یا شرکت در ucky Draw های پولی نیست.
 
 <section id="support">
 
-<div class="support-icon">
+<div class="support-icon reveal">
 🎧
 </div>
 
@@ -300,7 +306,7 @@ Points یا شرکت در ucky Draw های پولی نیست.
 مشکل داری؟ پیشنهاد داری؟ از اینجا با ما در ارتباط باش.
 </p>
 
-<div class="ticket-box">
+<div class="ticket-box reveal">
 
 <div class="ticket" onclick="showAnswer(1)">
 🎮 درباره کانال
@@ -357,11 +363,35 @@ document.getElementById("answer-box").innerHTML = answer;
 
 </section>
 
+<script src="script.js"></script>
+
+<script>
+document.body.classList.add("dark");
+</script>
+
+<script>
+window.addEventListener("scroll", function(){
+
+  let items = document.querySelectorAll(".reveal");
+
+  items.forEach(function(item){
+
+    let top = item.getBoundingClientRect().top;
+
+    if(top < window.innerHeight - 100){
+      item.classList.add("show");
+    }
+
+  });
+
+});
+</script>
+
 </body>
 
 </html>
 
-<div class="social">
+<div class="social reveal">
   <h2> شبکه های اجتماعی ما🎮</h2>
 
   <a href="https://youtube.com/@king_strike_trx?si=rFis0NfOooqoCOPe" target="_blank">

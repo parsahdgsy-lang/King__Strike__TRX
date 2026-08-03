@@ -87,3 +87,20 @@ document.getElementById("answer-box").style.display = "block";
 }
 
 }
+
+function toggleDarkMode(){
+
+  document.body.classList.toggle("dark");
+
+  let btn = document.getElementById("modeBtn");
+
+  if(document.body.classList.contains("dark")){
+    btn.innerText = "☀️ وایت مود";
+  }
+  else{
+    btn.innerText = "🌙 دارک مود";
+  }
+
+}
+
+document.body.classList.add("dark");
