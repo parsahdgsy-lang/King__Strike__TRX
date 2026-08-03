@@ -133,9 +133,9 @@ function toggleDarkMode() {
 
 <h2>📰 اخبار کالاف</h2>
 
-<div class="news-container reveal">
+<div class="news-container reveal searchable">
 
-<div class="news-card reveal">
+<div class="news-card reveal searchable">
 
 <img src="images/news1.jpg" alt="خبر">
 
@@ -151,7 +151,7 @@ function toggleDarkMode() {
 
 </div>
 
-<div class="news-card reveal">
+<div class="news-card reveal searchable">
 
 <img src="images/news2.jpg" alt="خبر دوم">
 
@@ -179,7 +179,7 @@ function toggleDarkMode() {
     <button>ادامه مطلب</button>
 </a>
 
-<div class="news-card reveal">
+<div class="news-card reveal searchable">
 
 <img src="images/news3.jpg" alt="خبر سوم">
 
@@ -195,7 +195,7 @@ function toggleDarkMode() {
 
 </div>
 
-<div class="news-card reveal"
+<div class="news-card reveal searchable"
  style="direction: rtl;"></div>
 
 <img src="images/news4.jpg" alt="خبر چهارم">
@@ -236,6 +236,46 @@ Points یا شرکت در ucky Draw های پولی نیست.
 
 </section>
 
+<div class="news-card reveal searchable">
+...
+</div>
+
+<div class="news-card reveal searchable">
+...
+</div>
+
+<div class="news-card reveal searchable">
+...
+</div>
+
+<script>
+function searchNews(){
+
+let input=document.getElementById("search").value.toLowerCase();
+
+let news=document.querySelectorAll(".searchable");
+
+let results=document.getElementById("search-results");
+
+results.innerHTML="";
+
+news.forEach(function(card){
+
+let text=card.querySelector("h3").innerText;
+
+let link=card.querySelector("a").href;
+
+if(text.toLowerCase().includes(input) && input!=""){
+
+results.innerHTML += <a href="${link}">${text}</a>;
+
+}
+
+});
+
+}
+</script>
+
 <section id="vote">
 
 <h2>نظرسنجی</h2>
@@ -247,6 +287,8 @@ Points یا شرکت در ucky Draw های پولی نیست.
 <button>USS9</button>
 
 <button>MG42</button>
+
+<button>AK117</button>
 
 </section>
 
@@ -369,10 +411,6 @@ window.addEventListener("scroll", function(){
 });
 </script>
 
-</body>
-
-</html>
-
 <div class="social reveal">
   <h2> شبکه های اجتماعی ما🎮</h2>
 
@@ -392,3 +430,7 @@ window.addEventListener("scroll", function(){
 <p>
 © King Strike TRX
 </p>
+
+</body>
+
+</html>
