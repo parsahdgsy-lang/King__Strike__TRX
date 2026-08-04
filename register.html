@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>ثبت نام | King Strike TRX</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h1>ثبت نام در King Strike TRX</h1>
+
+<input id="email" placeholder="ایمیل">
+<br><br>
+
+<input id="password" type="password" placeholder="رمز عبور">
+<br><br>
+
+<button onclick="register()">ثبت نام</button>
+
+<p id="message"></p>
+
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCTPMW0hSEXTG3CldonB2LBPlHJ_7n1KWg",
+  authDomain: "king-strike-trx-3b1de.firebaseapp.com",
+  projectId: "king-strike-trx-3b1de",
+  storageBucket: "king-strike-trx-3b1de.firebasestorage.app",
+  messagingSenderId: "787688884923",
+  appId: "1:787688884923:web:5f1aa77f670db2da93f79e"
+};
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
+window.register = function(){
+
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+
+
+createUserWithEmailAndPassword(auth,email,password)
+
+.then(()=>{
+document.getElementById("message").innerHTML="✅ ثبت نام موفق بود";
+})
+
+.catch((error)=>{
+document.getElementById("message").innerHTML="❌ "+error.message;
+});
+
+
+}
+
+</script>
+
+</body>
+
+</html>

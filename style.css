@@ -591,3 +591,57 @@ section img {
     margin: 20px auto;
     border-radius: 12px;
 }
+
+.login-btn{
+    background:#ffcc00;
+    color:#111;
+    padding:10px 18px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.login-btn:hover{
+    background:#fff;
+}
+
+body{
+    background:linear-gradient(135deg,#111,#333);
+    color:white;
+    font-family:tahoma;
+}
+
+
+input{
+    width:80%;
+    padding:15px;
+    margin:10px;
+    border-radius:15px;
+    border:1px solid #555;
+    background:#222;
+    color:white;
+    font-size:16px;
+}
+
+
+button{
+    width:85%;
+    padding:15px;
+    margin-top:15px;
+    border:none;
+    border-radius:15px;
+    background:#ffcc00;
+    color:#111;
+    font-size:18px;
+    font-weight:bold;
+}
+
+
+button:hover{
+    transform:scale(1.05);
+}
+
+
+h1{
+    color:#ffcc00;
+}
