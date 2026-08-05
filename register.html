@@ -22,43 +22,29 @@
 
 <p id="message"></p>
 
-
 <script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+const supabaseUrl = "https://drglzffrzkdyspktcswq.supabase.co"
+const supabaseKey = "sb_publishable_sGICuda0_-Gu3DZ3XNeVnQ_dAexvjnw"
+const supabase = createClient(supabaseUrl, supabaseKey)
 
+window.register = async function(){
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCTPMW0hSEXTG3CldonB2LBPlHJ_7n1KWg",
-  authDomain: "king-strike-trx-3b1de.firebaseapp.com",
-  projectId: "king-strike-trx-3b1de",
-  storageBucket: "king-strike-trx-3b1de.firebasestorage.app",
-  messagingSenderId: "787688884923",
-  appId: "1:787688884923:web:5f1aa77f670db2da93f79e"
-};
+let email = document.getElementById("email").value
+let password = document.getElementById("password").value
 
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-
-window.register = function(){
-
-let email = document.getElementById("email").value;
-let password = document.getElementById("password").value;
-
-
-createUserWithEmailAndPassword(auth,email,password)
-
-.then(()=>{
-document.getElementById("message").innerHTML="✅ ثبت نام موفق بود";
+const { data, error } = await supabase.auth.signUp({
+  email: email,
+  password: password
 })
 
-.catch((error)=>{
-document.getElementById("message").innerHTML="❌ "+error.message;
-});
-
+if(error){
+ document.getElementById("message").innerHTML = "❌ " + error.message
+}
+else{
+ document.getElementById("message").innerHTML = "✅ ثبت نام موفق بود"
+}
 
 }
 

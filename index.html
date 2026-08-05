@@ -284,16 +284,20 @@ results.innerHTML += <a href="${link}">${text}</a>;
 
 <p>بهترین گان این سیزن کدومه؟</p>
 
+<button onclick="vote('BP50')">
+BP50 (<span id="bp">0</span>)
+</button>
+
+<button onclick="vote('USS9')">
+USS9 (<span id="uss">0</span>)
+</button>
+
+<button onclick="vote('MG42')">
+MG42 (<span id="mg">0</span>)
+</button>
+
 <button onclick="vote('AK117')">
- AK117
-</button>
-
-<button onclick="vote('Kilo141')">
- Kilo 141
-</button>
-
-<button onclick="vote('DLQ33')">
- DL Q33
+AK117 (<span id="ak">0</span>)
 </button>
 
 </div>
@@ -436,6 +440,31 @@ window.addEventListener("scroll", function(){
 <p>
 © King Strike TRX
 </p>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  updateDoc,
+  increment
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD4fOgaxf_dOaA1l-f2i2tpd2Zay8N391U",
+  authDomain: "king-strike-trx.firebaseapp.com",
+  projectId: "king-strike-trx",
+  storageBucket: "king-strike-trx.firebasestorage.app",
+  messagingSenderId: "860431450910",
+  appId: "1:860431450910:web:ead57aa483fa26aa263f0f"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+console.log("Firebase Connected");
+</script>
 
 </body>
 
