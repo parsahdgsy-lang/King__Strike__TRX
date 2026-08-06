@@ -18,6 +18,12 @@
 <input id="password" type="password" placeholder="رمز عبور">
 <br><br>
 
+<input id="username" placeholder="نام کاربری">
+<br><br>
+
+<input id="avatar" type="file" accept="image/*">
+<br><br>
+
 <button onclick="register()">ثبت نام</button>
 
 <p id="message"></p>
@@ -33,6 +39,8 @@ window.register = async function(){
 
 let email = document.getElementById("email").value
 let password = document.getElementById("password").value
+let username = document.getElementById("username").value
+let avatar = document.getElementById("avatar").files[0]
 
 const { data, error } = await supabase.auth.signUp({
   email: email,
@@ -43,7 +51,18 @@ if(error){
  document.getElementById("message").innerHTML = "❌ " + error.message
 }
 else{
- document.getElementById("message").innerHTML = "✅ ثبت نام موفق بود"
+
+  await supabase
+    .from("profiles")
+    .insert([
+      {
+        id: data.user.id,
+        username: username
+      }
+    ])
+
+  document.getElementById("message").innerHTML = "✅ ثبت نام موفق بود"
+
 }
 
 }

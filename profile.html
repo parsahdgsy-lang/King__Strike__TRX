@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>پروفایل | King Strike TRX</title>
+
+<style>
+body{
+background:#111;
+color:white;
+font-family:tahoma;
+text-align:center;
+}
+
+.box{
+background:#222;
+width:90%;
+max-width:400px;
+margin:50px auto;
+padding:25px;
+border-radius:15px;
+}
+
+img{
+width:150px;
+height:150px;
+border-radius:50%;
+object-fit:cover;
+}
+
+button{
+background:red;
+color:white;
+border:0;
+padding:12px 25px;
+border-radius:10px;
+cursor:pointer;
+}
+
+input{
+margin:20px;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="box">
+
+<h1>🎮 پروفایل King Strike TRX</h1>
+
+<img id="avatar"
+src="https://via.placeholder.com/150">
+
+
+<br>
+
+<input type="file" id="file">
+
+
+<br>
+
+<button onclick="uploadAvatar()">
+آپلود عکس پروفایل
+</button>
+
+
+<p id="status"></p>
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+const supabaseUrl =
+"https://drglzffrzkdyspktcswq.supabase.co";
+
+
+const supabaseKey =
+"sb_publishable_sGICuda0_-Gu3DZ3XNeVnQ_dAexvjnw";
+
+
+const supabase =
+window.supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+
+
+
+async function uploadAvatar(){
+
+
+let file =
+document.getElementById("file").files[0];
+
+
+if(!file){
+
+document.getElementById("status").innerHTML =
+"اول عکس انتخاب کن";
+
+return;
+
+}
+
+
+
+let fileName =
+Date.now()+"_"+file.name;
+
+
+
+let {error} =
+await supabase.storage
+.from("avatars")
+.upload(fileName,file);
+
+
+
+if(error){
+
+document.getElementById("status").innerHTML =
+error.message;
+
+return;
+
+}
+
+
+
+let imageUrl =
+supabase.storage
+.from("avatars")
+.getPublicUrl(fileName)
+.data.publicUrl;
+
+
+
+document.getElementById("avatar").src =
+imageUrl;
+
+
+
+let user =
+await supabase.auth.getUser();
+
+
+
+if(user.data.user){
+
+
+await supabase
+.from("profiles")
+.update({
+
+avatar_url:imageUrl
+
+})
+.eq(
+"id",
+user.data.user.id
+);
+
+
+}
+
+
+
+document.getElementById("status").innerHTML =
+"✅ عکس پروفایل ذخیره شد";
+
+
+}
+
+
+</script>
+
+
+</body>
+</html>

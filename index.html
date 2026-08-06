@@ -5,6 +5,8 @@
 
 </section>
 
+<h3 id="user-name">در حال بررسی...</h3>
+
 <head>
 
 <meta charset="UTF-8">
@@ -464,6 +466,21 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 console.log("Firebase Connected");
+</script>
+
+<script>
+const { data } = await supabase.auth.getSession();
+
+if(data.session){
+    let email = data.session.user.email;
+
+    document.getElementById("user-name").innerHTML =
+    "👤 خوش آمدی: " + email;
+}
+else{
+    document.getElementById("user-name").innerHTML =
+    "❌ وارد نشده‌ای";
+}
 </script>
 
 </body>
