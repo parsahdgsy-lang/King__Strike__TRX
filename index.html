@@ -483,6 +483,42 @@ else{
 }
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const supabase = window.supabase.createClient(
+    "https://drglzffrzkdyspktcswq.supabase.co",
+    "کلید Publishable پروژه‌ات"
+);
+
+async function loadUser(){
+
+    const { data:{session} } = await supabase.auth.getSession();
+
+    if(!session){
+        document.getElementById("user-name").innerHTML = "❌ وارد نشده‌ای";
+        return;
+    }
+
+    const { data: profile } = await supabase
+        .from("profiles")
+        .select("username,avatar_url")
+        .eq("id", session.user.id)
+        .single();
+
+    if(profile){
+        document.getElementById("user-name").innerHTML =
+        "👤 " + profile.username;
+    }else{
+        document.getElementById("user-name").innerHTML =
+        session.user.email;
+    }
+
+}
+
+loadUser();
+</script>
+
 </body>
 
 </html>

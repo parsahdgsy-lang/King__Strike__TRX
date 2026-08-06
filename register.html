@@ -47,25 +47,37 @@ const { data, error } = await supabase.auth.signUp({
   password: password
 })
 
-if(error){
- document.getElementById("message").innerHTML = "❌ " + error.message
-}
-else{
+let avatarUrl = "";
 
-  await supabase
-    .from("profiles")
-    .insert([
-      {
-        id: data.user.id,
-        username: username
-      }
-    ])
+if (avatar) {
+  const fileName = data.user.id + "_" + avatar.name;
 
-  document.getElementById("message").innerHTML = "✅ ثبت نام موفق بود"
+  const { error: uploadError } = await supabase.storage
+    .from("avatars")
+    .upload(fileName, avatar);
 
+  if (!uploadError) {
+    avatarUrl = supabase.storage
+      .from("avatars")
+      .getPublicUrl(fileName).data.publicUrl;
+  }
 }
 
-}
+await supabase
+  .from("profiles")
+  .insert([
+    {
+      id: data.user.id,
+      username: username,
+      avatar_url: avatarUrl
+    }
+  ]);
+
+document.getElementById("message").innerHTML = "✅ ثبت نام موفق بود";
+
+setTimeout(() => {
+  window.location.href = "index.html";
+}, 1000);
 
 </script>
 
